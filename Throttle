@@ -1,0 +1,13 @@
+//throttle
+
+function throttle(fn, delay){
+    let throttled = false;
+return function throttled(...args){
+    if(!throttled){
+        fn(...args);
+        throttled = true
+        timeout = setTimeout(()=> throttled = false, delay)
+    }
+
+}    
+}
