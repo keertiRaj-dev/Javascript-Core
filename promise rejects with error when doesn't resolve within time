@@ -1,0 +1,15 @@
+//Implement promiseWithTimeout(promise, ms) that wraps any Promise and rejects with an Error('Timeout') if it doesn’t settle within ms milliseconds.
+
+function PromiseWithTimeout(promise, delay){
+ return new Promise((resolve, reject)=>{
+     let timeout = setTimeout(()=>reject(new Error("Timeout")), delay);
+     promise.then((value)=>{
+         clearTimeout(timeout);
+         resolve(value)
+     })
+     .catch((error)=>{
+         clearTimeout(timeout);
+         reject(error);
+     })
+ })
+}
