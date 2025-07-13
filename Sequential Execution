@@ -1,0 +1,17 @@
+/*Sequential Execution
+Given an array of functions that each return a Promise ([f1, f2, f3, …]), write runInSequence(funcs) so that they execute one after another, each starting only when the previous one resolves, and it returns a Promise for the last result. */
+
+function runInSequence(funcs) {
+  return funcs.reduce(
+    (prevPromise, func) => prevPromise.then(() => func()),
+    Promise.resolve()
+  );
+}
+
+// Example:
+const f1 = () => Promise.resolve(1);
+const f2 = () => new Promise(res => setTimeout(() => res(2), 100));
+const f3 = () => Promise.resolve(3);
+
+runInSequence([f1, f2, f3])
+  .then(result => console.log(result)); // → 3
