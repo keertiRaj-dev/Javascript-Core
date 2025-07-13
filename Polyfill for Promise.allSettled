@@ -1,0 +1,29 @@
+function myPromiseAllSettled(promises) {
+  return new Promise((resolve) => {
+    const total = promises.length;
+    const results = new Array(total);
+    let completed = 0;
+
+    if (total === 0) {
+      return resolve([]);
+    }
+
+    promises.forEach((p, i) => {
+      Promise.resolve(p)
+        .then(
+          value => {
+            results[i] = { status: 'fulfilled', value };
+          },
+          reason => {
+            results[i] = { status: 'rejected', reason };
+          }
+        )
+        .finally(() => {
+          completed += 1;
+          if (completed === total) {
+            resolve(results);
+          }
+        });
+    });
+  });
+}
