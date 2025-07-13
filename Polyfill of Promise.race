@@ -1,0 +1,9 @@
+function myPromiseRace(promises) {
+  return new Promise((resolve, reject) => {
+    for (const p of promises) {
+      // Wrap any value in a Promise so non-Promise inputs work too
+      Promise.resolve(p).then(resolve, reject);
+    }
+    // If `promises` is empty, the new Promise simply never settles.
+  });
+}
