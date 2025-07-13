@@ -1,0 +1,19 @@
+function setIntervalUsingTimeout(fn, delay) {
+  let timerId;
+  function tick() {
+    fn();
+    timerId = setTimeout(tick, delay);
+  }
+  timerId = setTimeout(tick, delay);
+  return () => clearTimeout(timerId);
+}
+
+function setIntervalUsingTimeout(fn, delay) {
+  let timerId;
+  function tick() {
+    fn();
+    timerId = setTimeout(tick, delay);
+  }
+  timerId = setTimeout(tick, delay);
+  return () => clearTimeout(timerId);
+}
