@@ -1,1 +1,22 @@
+function once(fn) {
+  let called = false;
+  let result;
+  return function(...args) {
+    if (!called) {
+      called = true;
+      result = fn.apply(this, args);
+    }
+    return result;
+  };
+}
+
+// Usage:
+const init = once(() => {
+  console.log('Initialized');
+  return 42;
+});
+
+console.log(init()); // Logs "Initialized", returns 42
+console.log(init()); // Returns 42 (no log)
+console.log(init()); // Returns 42
 
