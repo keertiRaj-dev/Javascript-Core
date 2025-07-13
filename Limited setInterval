@@ -1,0 +1,21 @@
+/*The prompt is asking you to write a helper called runNTimes(fn, interval, times) that:
+Calls fn() every interval milliseconds,
+Does so exactly times times,
+Then automatically stops.
+It’s basically a “limited” setInterval.*/
+
+function runNTimes(fn, interval, times, ...args){
+    let n=1;
+   let timeout =  setInterval(()=>{
+        if(n>=times){
+            clearInterval(timeout)
+        }
+        fn(...args);
+        n++;
+    }, interval);
+}
+
+function print(num){
+    console.log(num)
+}
+runNTimes(print, 1000, 5, 1)
